@@ -56,17 +56,17 @@ VALUES
     ('Company JJ', 'Manufacturing', 370.0, 3100, 1, 20, 12, 7.6),
     ('Company KK', 'Healthcare', 150.2, 3400, 0, 16, 8, 5.3);
 
--- 1. [filter using WHERE with AND, OR, IN, or NOT IN]
+
 SELECT company_name, revenue
 FROM fortune_companies
 WHERE revenue > '1'
 AND revenue < '1000';
 
--- 2. [calculation and alias]
+
 SELECT company_name, industry, AVG(paid_time_off_days) AS days_off
 FROM fortune_companies;
 
--- 3. [CASE]
+
 SELECT company_name, industry, employees,
 CASE WHEN employees >= 100000 THEN "Corporation" 
 WHEN employees >= 10000 THEN "Medium size business"
@@ -75,14 +75,14 @@ END AS Bussiness_size
 FROM fortune_companies;
 
 
--- 4. [HAVING]
+
 SELECT company_name, industry, AVG(paid_time_off_days) AS days_off
 FROM fortune_companies
 GROUP BY company_name
 HAVING AVG(paid_time_off_days) > 10 
 ORDER BY AVG(paid_time_off_days) DESC;
 
--- 5. [up to me!]
+
 SELECT company_name, avg_employee_tenure, industry, employees, healthcare_benefits,
 CASE WHEN employees >= 100000 THEN "Corporation" 
 WHEN employees >= 10000 THEN "Medium size business"
