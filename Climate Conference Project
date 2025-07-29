@@ -1,19 +1,19 @@
 Climate Conference Project
 Database: https://www.db-fiddle.com/f/pxMci1sLL945KHKYvpe9W6/1
 
-LEFT JOIN:  All VIPs and the name of the event they’re attending.
+--#1 LEFT JOIN:  All VIPs and the name of the event they’re attending.
 SELECT v.member_id, v.first_name, v.last_name, e.event_name
 FROM vips AS v
 LEFT JOIN events AS e
  ON v.event = e.event_id;
 
-INNER JOIN:  Every VIP who’s made a reservation and their RSVP status.
+--#2 INNER JOIN:  Every VIP who’s made a reservation and their RSVP status.
 SELECT v.member_id, v.first_name, v.last_name, r.hotel, r.welcome_rsvp, r.dinner_rsvp
 FROM vips AS v
 INNER JOIN reservations AS r
  ON v.member_id = r.member_id;
 
-Multiple JOINs: VIP’s full name, their association, the event name they’re signed up for, and the hotel address where they’ve reserved and ordered by last name.
+--#3 Multiple JOINs: VIP’s full name, their association, the event name they’re signed up for, and the hotel address where they’ve reserved and ordered by last name.
 SELECT v.first_name AS first_name, v.last_name AS last_name, v.association, e.event_name, h.address
 FROM vips AS v
 INNER JOIN reservations AS r 
@@ -24,19 +24,19 @@ INNER JOIN events AS e
   ON v.event = e.event_id
 ORDER BY v.last_name;
 
-Query with a Subquery: All VIPs who have never made a reservation.
+--#4 Query with a Subquery: All VIPs who have never made a reservation.
 SELECT member_id, first_name, last_name
 FROM vips
 WHERE member_id NOT IN (SELECT member_id  FROM reservations);
 
-Custom Query: Each VIP alongside the VIP they provide feedback to.
+--#5 Custom Query: Each VIP alongside the VIP they provide feedback to.
 SELECT v.first_name AS celebrity, fb.first_name AS feedback
 FROM vips AS v
 LEFT JOIN vips AS fb
  ON v.provides_feedback_to = fb.member_id
 WHERE fb.first_name IS NOT NULL;
 
-Custom Query: VIPs who have made more than one reservation, and how many they’ve made.
+--#6 Custom Query: VIPs who have made more than one reservation, and how many they’ve made.
 SELECT v.member_id, COUNT(*) AS reservation_count
 FROM vips AS v
 INNER JOIN reservations AS r
