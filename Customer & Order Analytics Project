@@ -28,8 +28,7 @@ FROM BIT_DB.JanSales
 ORDER BY price ASC LIMIT 1;
 
 --#5 What is the total revenue for each product sold in January?
-SELECT sum(quantity)*price as revenue
-,product
+SELECT sum(quantity)*price as revenue,product
 FROM BIT_DB.JanSales
 GROUP BY product;
 
@@ -47,3 +46,9 @@ ON FEB.orderid=cust.order_id
 WHERE Feb.Quantity>2
 AND length(orderid) = 6
 AND orderid <> 'Order ID';
+
+--#8 List all the products sold in Los Angeles in February, and include how many of each were sold
+SELECT SUM(quantity), product
+FROM BIT_DB.FebSales
+WHERE location like '%Los Angeles%'
+GROUP BY product;
